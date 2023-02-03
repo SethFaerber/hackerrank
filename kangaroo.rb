@@ -25,7 +25,13 @@ class Race
         no
         break
       end
-      compare_positions(k1_position, k2_position)
+
+      @jump_number += 1 if k1_position < k2_position
+
+      if k1_position == k2_position
+        yes
+        break
+      end
     end
   end
 
@@ -35,11 +41,6 @@ class Race
 
   def calculate_k2_position
     @jump_number * @k2_jump + @k2_start
-  end
-
-  def compare_positions(k1_position, k2_position)
-    @jump_number += 1 if k1_position < k2_position
-    yes if k1_position == k2_position
   end
 
   def yes
