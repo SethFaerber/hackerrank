@@ -1,10 +1,10 @@
 class Race
-  def initialize(k1_start, k2_start, k1_jump, k2_jump, jump_number)
+  def initialize(k1_start, k2_start, k1_jump, k2_jump)
     @k1_start = k1_start
     @k2_start = k2_start
     @k1_jump = k1_jump
     @k2_jump = k2_jump
-    @jump_number = jump_number
+    @jump_number = 0
   end
 
   def call
@@ -17,29 +17,27 @@ class Race
   end
 
   def race_the_roos
-    @jump_number = 0
     10000.times do
-      k1_position = calculate_k1_position(jump_number)
-      k2_position = calculate_k2_position(jump_number)
-      check_k1_passes_k2(k1_position, k2_position)
+      k1_position = calculate_k1_position
+      k2_position = calculate_k2_position
+
+      if k1_position > k2_position
+        no
+        break
+      end
       compare_positions(k1_position, k2_position)
     end
   end
 
-  def check_k1_passes_k2(k1_position, k2_position)
-    no if k1_position > k2_position
+  def calculate_k1_position
+    @jump_number * @k1_jump + @k1_start
   end
 
-  def calculate_k1_position(jump_number)
-    jump_number * @k1_jump + @k1_start
-  end
-
-  def calculate_k2_position(jump_number)
-    jump_number * @k2_jump + @k2_start
+  def calculate_k2_position
+    @jump_number * @k2_jump + @k2_start
   end
 
   def compare_positions(k1_position, k2_position)
-    no if k1_position > k2_position
     @jump_number += 1 if k1_position < k2_position
     yes if k1_position == k2_position
   end
@@ -50,7 +48,6 @@ class Race
 
   def no
     puts "NO"
-    break
   end
 end
 
