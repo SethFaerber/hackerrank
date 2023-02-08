@@ -1,5 +1,10 @@
 class Race
-  def initialize(k1_start, k2_start, k1_jump, k2_jump)
+  attr_accessor :k1_start
+  attr_accessor :k2_start
+  attr_accessor :k1_jump
+  attr_accessor :k2_jump
+
+  def initialize(k1_start, k1_jump, k2_start, k2_jump)
     @k1_start = k1_start
     @k2_start = k2_start
     @k1_jump = k1_jump
@@ -7,9 +12,14 @@ class Race
     @jump_number = 0
   end
 
+
   def call
+    @return = ""
+
     remove_fast_k2
     race_the_roos
+
+    puts @return
   end
 
   def remove_fast_k2
@@ -24,11 +34,9 @@ class Race
       if k1_position > k2_position
         no
         break
-      end
-
-      @jump_number += 1 if k1_position < k2_position
-
-      if k1_position == k2_position
+      elsif k1_position < k2_position
+        @jump_number += 1
+      elsif k1_position == k2_position
         yes
         break
       end
@@ -36,26 +44,29 @@ class Race
   end
 
   def calculate_k1_position
-    @jump_number * @k1_jump + @k1_start
+    (@jump_number * @k1_jump) + @k1_start
   end
 
   def calculate_k2_position
-    @jump_number * @k2_jump + @k2_start
+    (@jump_number * @k2_jump) + @k2_start
   end
 
   def yes
-    puts "YES"
+    @return = "YES"
   end
 
   def no
-    puts "NO"
+    @return = "NO"
   end
 end
 
+# Why is this running reverse
+
 race_yes = Race.new(0, 3, 4, 2)
 race_no = Race.new(0, 2, 5, 3)
+race_test = Race.new(0, 3, 4, 2)
 race_yes.call
-race_no.call
+# race_test.call
 
 # Couple Approaches
 # create an array of jumps for 1 kangaroo.
