@@ -3,6 +3,7 @@ class Race
   attr_accessor :k2_start
   attr_accessor :k1_jump
   attr_accessor :k2_jump
+  attr_accessor :jump_number
 
   def initialize(k1_start, k1_jump, k2_start, k2_jump)
     @k1_start = k1_start
