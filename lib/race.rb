@@ -29,8 +29,8 @@ class Race
 
   def race_the_roos
     10000.times do
-      k1_position = calculate_k1_position
-      k2_position = calculate_k2_position
+      k1_position = calculate_position(@k1_start, @k1_jump)
+      k2_position = calculate_position(@k2_start, @k2_jump)
 
       if k1_position > k2_position
         no
@@ -44,13 +44,17 @@ class Race
     end
   end
 
-  def calculate_k1_position
-    (@jump_number * @k1_jump) + @k1_start
+  def calculate_position(start, jump)
+    (@jump_number * jump) + start
   end
 
-  def calculate_k2_position
-    (@jump_number * @k2_jump) + @k2_start
-  end
+  # def calculate_k1_position
+  #   (@jump_number * @k1_jump) + @k1_start
+  # end
+  #
+  # def calculate_k2_position
+  #   (@jump_number * @k2_jump) + @k2_start
+  # end
 
   def yes
     @return = "YES"
@@ -62,11 +66,11 @@ class Race
 end
 
 # Why is this running reverse
-
-race_yes = Race.new(0, 3, 4, 2)
-race_no = Race.new(0, 2, 5, 3)
-race_test = Race.new(0, 3, 4, 2)
-race_yes.call
+#
+# race_yes = Race.new(0, 3, 4, 2)
+# race_no = Race.new(0, 2, 5, 3)
+# race_test = Race.new(0, 3, 4, 2)
+# race_yes.call
 # race_test.call
 
 # Couple Approaches

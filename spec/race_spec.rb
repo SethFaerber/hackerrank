@@ -33,13 +33,13 @@ RSpec.describe Race do
     it "calculates k1's position" do
       race.jump_number = 1
 
-      expect(race.calculate_k1_position).to eq(3)
+      expect(race.calculate_position(0, 3)).to eq(3)
     end
 
     it "calculates k2's position" do
       race.jump_number = 1
 
-      expect(race.calculate_k2_position).to eq(6)
+      expect(race.calculate_position(4, 2)).to eq(6)
     end
   end
 
@@ -54,8 +54,7 @@ RSpec.describe Race do
 
   context "when kangaroo 2 is equally as fast as kangaroo 1" do
     it "returns NO" do
-      race.k1_jump = 2
-      race.k2_jump = 2
+      race.k1_jump = race.k2_jump
 
       expect(race.remove_fast_k2).to eq("NO")
     end
@@ -65,7 +64,17 @@ RSpec.describe Race do
     it "returns NO if k1's position is ahead of k2" do
       # access the variables here and set them. Stub?
 
+      race.race_the_roos
+
       expect(race.remove_fast_k2).to eq("NO")
+    end
+
+    it "returns returns YES of positions are equal" do
+
+    end
+
+    it "increments the jump_number variable if k1's positioni is behind k2" do
+
     end
   end
 
