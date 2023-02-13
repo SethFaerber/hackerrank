@@ -2,30 +2,45 @@ class FactorFinder
 
   attr_accessor :factors_array
   attr_accessor :multiples_array
-  attr_accessor :candidates
+  attr_accessor :multiples_array
 
   def initialize(factors_array, multiples_array)
     @factors_array = factors_array
     @multiples_array = multiples_array
     @candidates = []
-
+    @answers = []
   end
 
-  def candidates_first_element
-    @factors_array.pop
+  def find_lcm
+    @factors_array.reduce(@factors_array.first, :lcm)
   end
 
-  def candidates_last_element
-    @multiples_array.shift
+  def find_gcd
+    @multiples_array.reduce(@multiples_array.last, :gcd)
   end
 
-  def number_of_times
-    candidates_last_element/candidates_first_element
+  def number_of_candidates
+    find_gcd/find_lcm
   end
 
-  def add_candidates
-    number_of_times.times do |n|
-      @candidates << (candidates_first_element * (n + 1))
+  def create_candidates
+    number_of_candidates.times do |n|
+      @candidates << (n + 1) * find_lcm
     end
+    @candidates
+  end
+
+  def eliminate_candidates
+    create_candidates.each do |candidate|
+      if @multiples_array.all? { |multiple| multiple%candidate == 0}
+        @answers << candidate
+      end
+    end
+    @answers
+  end
+
+  def count_answers
+    eliminate_candidates
+    @answers.count
   end
 end
