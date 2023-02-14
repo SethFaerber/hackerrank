@@ -29,15 +29,11 @@ class FactorFinder
     @candidates
   end
 
-  def eliminate_candidates
-    create_candidates.each do |candidate|
-      @answers = @multiples_array.select { |multiple| multiple%candidate == 0 }
-    end
-    @answers
+  def select_candidates
+    @candidates.select { |candidate| @multiples_array.all? { |multiple| multiple%candidate == 0 } }
   end
 
   def count_answers
-    eliminate_candidates
-    @answers.count
+    select_candidates.count
   end
 end
