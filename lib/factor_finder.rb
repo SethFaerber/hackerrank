@@ -31,9 +31,7 @@ class FactorFinder
 
   def eliminate_candidates
     create_candidates.each do |candidate|
-      if @multiples_array.all? { |multiple| multiple%candidate == 0}
-        @answers << candidate
-      end
+      @answers = @multiples_array.select { |multiple| multiple%candidate == 0 }
     end
     @answers
   end
