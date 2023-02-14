@@ -7,7 +7,6 @@ class FactorFinder
     @factors_array = factors_array
     @multiples_array = multiples_array
     @candidates = []
-    @answers = []
   end
 
   def count_answers
