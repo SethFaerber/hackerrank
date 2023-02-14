@@ -30,7 +30,7 @@ RSpec.describe FactorFinder do
   end
 
   it "leaves only candidates who are factors of the multiples array" do
-    expect(object.eliminate_candidates).to eq( [4, 8, 16] )
+    expect(object.select_candidates).to eq( [4, 8, 16] )
     end
 
   it "returns the final number of candidates that match the solution" do
