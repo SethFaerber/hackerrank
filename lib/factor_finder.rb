@@ -30,7 +30,7 @@ class FactorFinder
   end
 
   def select_candidates
-    @candidates.select { |candidate| @multiples_array.all? { |multiple| multiple%candidate == 0 } }
+    create_candidates.select { |candidate| @multiples_array.all? { |multiple| multiple%candidate == 0 } }
   end
 
   def count_answers
