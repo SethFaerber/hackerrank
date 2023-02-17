@@ -14,7 +14,7 @@ class FactorFinder
   end
 
   def select_candidates
-    create_candidates.select { |candidate| @multiples_array.all? { |multiple| multiple%candidate == 0 } }
+    create_candidates.select { |candidate| @multiples_array.all? { |multiple| multiple%candidate.zero? } }
   end
 
   def create_candidates
